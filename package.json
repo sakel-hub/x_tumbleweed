@@ -14,7 +14,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "luacheck .",
-        "push:ci": "node ./scripts/deploy"
+        "push:ci": "node ./scripts/deploy.mjs"
     },
     "repository": {
         "type": "git",
