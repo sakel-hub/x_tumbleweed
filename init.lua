@@ -1,6 +1,6 @@
 --[[
     X Tumbleweed. Adds tumbleweeds.
-    Copyright (C) 2023 SaKeL <juraj.vajda@gmail.com>
+    Copyright (C) 2025 SaKeL
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -16,16 +16,16 @@
     License along with this library; if not, write to juraj.vajda@gmail.com
 --]]
 
-local path = minetest.get_modpath('x_tumbleweed')
-local mod_start_time = minetest.get_us_time()
+local path = core.get_modpath('x_tumbleweed')
+local mod_start_time = core.get_us_time()
 
 dofile(path .. '/api.lua')
 dofile(path .. '/entity.lua')
 
-minetest.register_globalstep(function(...)
+core.register_globalstep(function(...)
     XTumbleweed:globalstep(...)
 end)
 
-local mod_end_time = (minetest.get_us_time() - mod_start_time) / 1000000
+local mod_end_time = (core.get_us_time() - mod_start_time) / 1000000
 
 print('[Mod] x_tumbleweed loaded.. [' .. mod_end_time .. 's]')

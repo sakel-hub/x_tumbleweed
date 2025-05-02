@@ -3,21 +3,21 @@ allow_defined_top = true
 max_line_length = false
 
 exclude_files = {
-    './scripts',
-    './bin',
-    './logs',
-    './node_modules',
-    './sounds',
-    './textures',
-    './models',
-    './docs',
-    './locale',
-    './types',
+    "./scripts",
+    "./bin",
+    "./logs",
+    "./node_modules",
+    "./sounds",
+    "./textures",
+    "./models",
+    "./docs",
+    "./locale",
+    "./types",
 }
 
 globals = {
-    'minetest',
-    'XEnchanting'
+    "minetest",
+    "XEnchanting"
 }
 
 read_globals = {

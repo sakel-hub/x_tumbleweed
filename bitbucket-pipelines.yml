@@ -13,7 +13,6 @@ pipelines:
                     - nvm install v17.2.0
                     - npm i -g npm@8
                     - npm ci
-            # - parallel:
             - step:
                 name: Lua Check
                 script:
@@ -22,15 +21,6 @@ pipelines:
                     - apt-get -y install luarocks
                     - luarocks install luacheck
                     - luacheck .
-                # - step:
-                #     name: Lua Diagnostics
-                #     caches:
-                #         - node-modules
-                #         - npm
-                #         - nvm
-                #     script:
-                #         - nvm use v17.2.0
-                #         - npm run lua-diagnostics
     tags:
         "*":
             - step:
@@ -43,7 +33,6 @@ pipelines:
                     - nvm install v17.2.0
                     - npm i -g npm@8
                     - npm ci
-            # - parallel:
             - step:
                 name: Lua Check
                 script:
@@ -52,26 +41,29 @@ pipelines:
                     - apt-get -y install luarocks
                     - luarocks install luacheck
                     - luacheck .
-                # - step:
-                #     name: Lua Diagnostics
-                #     caches:
-                #         - node-modules
-                #         - npm
-                #         - nvm
-                #     script:
-                #         - nvm use v17.2.0
-                #         - npm run lua-diagnostics
-            - step:
-                name: Deploy to ContentDB
-                caches:
-                    - node-modules
-                    - npm
-                    - nvm
-                script:
-                    - nvm use v17.2.0
-                    - npm run push:ci -- --token=$CONTENT_DB_X_TUMBLEWEED_TOKEN --title=$BITBUCKET_TAG
+            # - step:
+            #     name: Deploy to ContentDB
+            #     caches:
+            #         - node-modules
+            #         - npm
+            #         - nvm
+            #     script:
+            #         - nvm use v17.2.0
+            #         - npm run push:ci -- --token=$CONTENT_DB_X_TUMBLEWEED_TOKEN --title=$BITBUCKET_TAG
 definitions:
     caches:
-        node-modules: ./node_modules
-        npm: ~/.npm
-        nvm: ~/.nvm
+        node-modules:
+            key:
+                files:
+                    - package-lock.json
+            path: ./node_modules
+        npm:
+            key:
+                files:
+                    - package.json
+            path: ~/.npm
+        nvm:
+            key:
+                files:
+                    - .nvmrc
+            path: ~/.nvm

@@ -1,6 +1,6 @@
 /**
  * Deploy code to CDB
- * Copyright (C) 2023 SaKeL <juraj.vajda@gmail.com>
+ * Copyright (C) 2025 SaKeL
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,7 +18,8 @@
 
 import fetch from 'node-fetch'
 import yargs from 'yargs/yargs'
-import {hideBin} from 'yargs/helpers'
+import { hideBin } from 'yargs/helpers'
+import 'dotenv/config'
 
 const argv = yargs(hideBin(process.argv)).argv
 
@@ -29,12 +30,12 @@ try {
         ref: 'master'
     }
 
-    const response = await fetch('https://content.minetest.net/api/packages/SaKeL/x_tumbleweed/releases/new/', {
+    const response = await fetch('https://content.luanti.org/api/packages/SaKeL/x_tumbleweed/releases/new/', {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${argv.token}`
+            Authorization: `Bearer ${process.env.CONTENT_DB_X_TUMBLEWEED_TOKEN ?? argv.token}`
         }
     })
     const data = await response.json()

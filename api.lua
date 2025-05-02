@@ -1,6 +1,6 @@
 --[[
     X Tumbleweed. Adds tumbleweeds.
-    Copyright (C) 2023 SaKeL <juraj.vajda@gmail.com>
+    Copyright (C) 2025 SaKeL
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -16,12 +16,12 @@
     License along with this library; if not, write to juraj.vajda@gmail.com
 --]]
 
-local S = minetest.get_translator(minetest.get_current_modname())
+local S = core.get_translator(core.get_current_modname())
 
 ---@type XTumbleweed
 XTumbleweed = {
     settings = {
-        abr = minetest.get_mapgen_setting('active_block_range') or 4 --[[@as number]]
+        abr = core.get_mapgen_setting('active_block_range') or 4 --[[@as number]]
     },
     spawn_reduction = 0.5,
     spawn_rate = 0.5,
@@ -101,7 +101,7 @@ function XTumbleweed.register_entity(self, name, def)
         XTumbleweed:on_punch(...)
     end
 
-    minetest.register_entity(name, _def)
+    core.register_entity(name, _def)
 end
 
 ---@diagnostic disable-next-line: unused-local
@@ -123,7 +123,7 @@ function XTumbleweed.brainfunc(self, selfObj)
                 posadd = { x = math.cos(angle), y = 0, z = math.sin(angle) }
                 posadd = vector.normalize(posadd)
                 local mobname = 'x_tumbleweed:tumbleweed'
-                local obj = minetest.add_entity(vector.add(pos, posadd), mobname)
+                local obj = core.add_entity(vector.add(pos, posadd), mobname)
 
                 if obj then
                     local lua_ent = obj:get_luaentity()
@@ -159,10 +159,10 @@ function XTumbleweed.brainfunc(self, selfObj)
             end
         end
 
-        minetest.after(4.5, function()
+        core.after(4.5, function()
             local pos_after = selfObj.object:get_pos()
 
-            minetest.add_particlespawner({
+            core.add_particlespawner({
                 amount = 9,
                 time = 1,
                 minpos = pos_after,
@@ -187,18 +187,18 @@ function XTumbleweed.brainfunc(self, selfObj)
             -- drop items
             local puncher = selfObj._puncher
             local death_by_player = puncher and puncher:is_player()
-            local biome_data = minetest.get_biome_data(pos)
+            local biome_data = core.get_biome_data(pos)
             local biome_name = ''
 
             if biome_data then
-                biome_name = minetest.get_biome_name(biome_data.biome) or ''
+                biome_name = core.get_biome_name(biome_data.biome) or ''
             end
 
             if death_by_player and pos_after then
                 -- find suitable drop items
                 local registered_decorations_filtered = { 'default:stick' }
 
-                for _, v in pairs(minetest.registered_decorations) do
+                for _, v in pairs(core.registered_decorations) do
                     local registered_biome_names = v.biomes
 
                     if type(registered_biome_names) == 'string' then
@@ -218,10 +218,10 @@ function XTumbleweed.brainfunc(self, selfObj)
                             for _, item_name in ipairs(item_names) do
                                 local item_name_result = item_name
 
-                                if minetest.registered_nodes[item_name_result] and minetest.registered_nodes[item_name_result].drop then
-                                    item_name_result = minetest.registered_nodes[item_name_result].drop
-                                elseif minetest.registered_items[item_name_result] and minetest.registered_items[item_name_result].drop then
-                                    item_name_result = minetest.registered_items[item_name_result].drop
+                                if core.registered_nodes[item_name_result] and core.registered_nodes[item_name_result].drop then
+                                    item_name_result = core.registered_nodes[item_name_result].drop
+                                elseif core.registered_items[item_name_result] and core.registered_items[item_name_result].drop then
+                                    item_name_result = core.registered_items[item_name_result].drop
                                 end
 
                                 if type(item_name_result) == 'table' then
@@ -257,7 +257,7 @@ function XTumbleweed.brainfunc(self, selfObj)
                             name = stack_name,
                             count = math.random(3) * chance
                         })
-                        local stack_obj = minetest.add_item(
+                        local stack_obj = core.add_item(
                             { x = pos_after.x, y = pos_after.y + 1, z = pos_after.z },
                             stack
                         )
@@ -290,7 +290,7 @@ function XTumbleweed.brainfunc(self, selfObj)
         local ypos = pos.y - 0.5
         local will_fall = false
 
-        local not_blocking_sight = minetest.line_of_sight(
+        local not_blocking_sight = core.line_of_sight(
             { x = pos.x + dir_x, y = ypos, z = pos.z + dir_z },
             { x = pos.x + dir_x, y = ypos - 1, z = pos.z + dir_z })
 
@@ -304,7 +304,7 @@ function XTumbleweed.brainfunc(self, selfObj)
         else
             mobkit.lq_dumbjump(selfObj, 1.3, 'walk')
 
-            minetest.add_particlespawner({
+            core.add_particlespawner({
                 amount = 6,
                 time = 0.5,
                 minpos = {
@@ -345,7 +345,7 @@ end
 ---@diagnostic disable-next-line: unused-local
 function XTumbleweed.on_punch(self, selfObj, puncher, time_from_last_punch, tool_capabilities, dir)
     if mobkit.is_alive(selfObj) then
-        minetest.sound_play({
+        core.sound_play({
             name = self.sounds.neutral
         }, {
             object = selfObj.object
@@ -359,7 +359,7 @@ function XTumbleweed.on_punch(self, selfObj, puncher, time_from_last_punch, tool
 
         mobkit.hurt(selfObj, damage)
 
-        selfObj.object:set_yaw(minetest.dir_to_yaw(dir))
+        selfObj.object:set_yaw(core.dir_to_yaw(dir))
     end
 end
 
@@ -370,19 +370,19 @@ function XTumbleweed.globalstep(self, dtime)
     local spawnpos, liquidflag = mobkit.get_spawn_pos_abr(dtime, 3, abr * 16, spawn_rate, spawn_reduction)
 
     if spawnpos and not liquidflag then
-        local biome_data = minetest.get_biome_data(spawnpos)
+        local biome_data = core.get_biome_data(spawnpos)
 
         if not biome_data then
             return
         end
 
-        local biome_name = minetest.get_biome_name(biome_data.biome)
+        local biome_name = core.get_biome_name(biome_data.biome)
 
         if not biome_name then
             return
         end
 
-        local objs = minetest.get_objects_inside_radius(spawnpos, abr * 16 * 1.1)
+        local objs = core.get_objects_inside_radius(spawnpos, abr * 16 * 1.1)
         local tumbleweed_counter = 0
 
         if not tableContains(self.allowed_biomes, biome_name) then
@@ -407,11 +407,11 @@ function XTumbleweed.globalstep(self, dtime)
         end
 
         local mobname = 'x_tumbleweed:tumbleweed'
-        local obj = minetest.add_entity({ x = spawnpos.x, y = spawnpos.y + 0.5, z = spawnpos.z }, mobname)
+        local obj = core.add_entity({ x = spawnpos.x, y = spawnpos.y + 0.5, z = spawnpos.z }, mobname)
 
         -- camouflage texture
-        local spawn_node = minetest.get_node(vector.new(spawnpos.x, spawnpos.y - 1, spawnpos.z))
-        local spawn_node_def = minetest.registered_nodes[spawn_node.name]
+        local spawn_node = core.get_node(vector.new(spawnpos.x, spawnpos.y - 1, spawnpos.z))
+        local spawn_node_def = core.registered_nodes[spawn_node.name]
         local tex = spawn_node_def.tiles
 
         if spawn_node_def and spawn_node_def.walkable then
@@ -467,9 +467,9 @@ function XTumbleweed.globalstep(self, dtime)
             obj:set_properties(obj_properties)
         end
 
-        minetest.log(
+        core.log(
             'action',
-            '[x_tumbleweed] Spawned ' .. mobname .. ' at ' .. minetest.pos_to_string(spawnpos)
+            '[x_tumbleweed] Spawned ' .. mobname .. ' at ' .. core.pos_to_string(spawnpos)
         )
     end
 end

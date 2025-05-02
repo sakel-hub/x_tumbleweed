@@ -13,8 +13,8 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "push:ci": "node ./scripts/deploy",
-        "lua-diagnostics": "node ./scripts/lls-check"
+        "lint": "luacheck .",
+        "push:ci": "node ./scripts/deploy"
     },
     "repository": {
         "type": "git",
@@ -27,8 +27,10 @@
     },
     "homepage": "https://bitbucket.org/minetest_gamers/x_tumbleweed#readme",
     "devDependencies": {
-        "jaguar": "^6.0.1",
         "node-fetch": "^3.2.10",
         "yargs": "^17.6.1"
+    },
+    "dependencies": {
+        "dotenv": "^16.5.0"
     }
 }
