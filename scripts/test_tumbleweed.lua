@@ -263,6 +263,7 @@ assert_eq("Makes footstep sound is enabled", mdef.makes_footstep_sound, true)
 assert_eq("Knockback mult is 0 (custom punch impulse)", mdef.knockback_mult, 0)
 assert_eq("Health regen is disabled", mdef.health_regen, false)
 assert_eq("Can flee is disabled", mdef.can_flee, false)
+assert_eq("Flee threshold is 0", mdef.flee_threshold, 0)
 assert_eq("Mob type is passive", mdef.mob_type, "passive")
 assert_eq("Aggro radius is 0", mdef.aggro_radius, 0)
 assert_true("Damage effect is configured", mdef.damage_effect ~= nil)
@@ -397,6 +398,17 @@ mock_mob.state = "fleeing"
 mdef.on_step(mock_mob, 0.05, { touching_ground = true })
 assert_eq("Mob target cleared on step", mock_mob.target, nil)
 assert_eq("Mob state reset to walk on step", mock_mob.state, "walk")
+
+-- Test 12c: Low HP bounce and forward roll preservation (no flee spin)
+mock_mob.hp = 2 -- <= 25% threshold (2 out of 10 HP)
+mock_mob._hop_cooldown = 0
+mock_obj._yaw = 0
+mock_mob.state = "walk"
+mdef.on_step(mock_mob, 0.05, { touching_ground = true })
+assert_eq("Mob state remains walk on low HP", mock_mob.state, "walk")
+assert_true("Low HP tumbleweed still bounces upward (vy >= 3.0)", mock_obj._vel.y >= 3.0)
+assert_true("Low HP tumbleweed rolls forward along heading", mock_obj._vel.z > 0)
+assert_eq("Mob target remains nil on low HP", mock_mob.target, nil)
 
 -- Test 13: Lethal punch and Child Breakup
 spawned_entities = {}

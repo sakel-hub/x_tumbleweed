@@ -412,6 +412,7 @@ function XTumbleweed.register_entity(name, def)
     _def.death_duration = 0.5
     _def.health_regen = false
     _def.can_flee = false
+    _def.flee_threshold = 0
     _def.mob_type = "passive"
     _def.aggro_radius = 0
     _def.attack_range = 0
@@ -493,6 +494,9 @@ function XTumbleweed.register_entity(name, def)
     end
 
     _def.on_hurt = function(self)
+        if self.memory and self.memory.flee_state then
+            self.memory.flee_state = false
+        end
         self.target = nil
         if self.state ~= "walk" and self.state ~= "stand" and self.state ~= "dying" then
             self.state = "walk"
@@ -563,6 +567,9 @@ function XTumbleweed.register_entity(name, def)
     _def.on_step = function(self, dtime, moveresult)
         if self.is_dead or self.state == "dying" then return end
 
+        if self.memory and self.memory.flee_state then
+            self.memory.flee_state = false
+        end
         self.target = nil
         if self.state ~= "walk" and self.state ~= "stand" then
             self.state = "walk"
