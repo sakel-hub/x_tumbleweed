@@ -86,6 +86,7 @@ assets/** export-ignore
 /scripts export-ignore
 scripts/** export-ignore
 /scratch export-ignore
+scratch/** export-ignore
 *.ai export-ignore
 *.blend export-ignore
 *.blend1 export-ignore

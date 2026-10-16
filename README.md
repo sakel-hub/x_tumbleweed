@@ -1,11 +1,13 @@
-# X Tumbleweed [x_tumbleweed]
+# X Tumbleweed (`x_tumbleweed`)
 
 [![ContentDB](https://content.luanti.org/packages/SaKeL/x_tumbleweed/shields/title/)](https://content.luanti.org/packages/SaKeL/x_tumbleweed/)
 [![ContentDB Downloads](https://content.luanti.org/packages/SaKeL/x_tumbleweed/shields/downloads/)](https://content.luanti.org/packages/SaKeL/x_tumbleweed/)
-[![Version: 2.0.0](https://img.shields.io/badge/version-2.0.0-orange.svg)](package.json)
+![Luanti](https://img.shields.io/badge/Luanti-5.10%2B-5599ff.svg)
+[![Luacheck](https://img.shields.io/github/actions/workflow/status/sakel-hub/x_tumbleweed/luacheck.yml?label=Luacheck&logo=lua)](https://github.com/sakel-hub/x_tumbleweed/actions)
 [![License: LGPL 2.1](https://img.shields.io/badge/License-LGPL_v2.1-blue.svg)](LICENSE.txt)
 [![Media License: CC-BY-SA 4.0](https://img.shields.io/badge/Media-CC_BY--SA_4.0-lightgrey.svg)](LICENSE.txt)
-![Luanti](https://img.shields.io/badge/Luanti-5.10%2B-5599ff.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/sakel-hub/x_tumbleweed/pulls)
+
 
 Brings arid lands to life with lively, wind-blown tumbleweeds that bounce and tumble across vast desert sands, leap over rocky ledges, split into baby tumbleweeds, and drop useful desert flora for thirsty explorers.
 
@@ -64,7 +66,7 @@ end
 
 - **Required Mod**: [x_mob_core](https://content.luanti.org/packages/SaKeL/x_mob_core/) (2.0.0+)
 - **Optional**: `default` (from Minetest Game for standard desert nodes and foliage)
-- **Engine**: Luanti / Minetest 5.10 or newer
+- **Engine**: Luanti 5.10 or newer
 
 ---
 
