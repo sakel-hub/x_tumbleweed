@@ -18,14 +18,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://bitbucket.org/minetest_gamers/x_tumbleweed.git"
+        "url": "git+https://github.com/sakel-hub/x_tumbleweed.git"
     },
     "author": "SaKeL",
     "license": "LGPL-2.1-or-later",
     "bugs": {
-        "url": "https://bitbucket.org/minetest_gamers/x_tumbleweed/issues"
+        "url": "https://github.com/sakel-hub/x_tumbleweed/issues"
     },
-    "homepage": "https://bitbucket.org/minetest_gamers/x_tumbleweed#readme",
+    "homepage": "https://github.com/sakel-hub/x_tumbleweed#readme",
     "devDependencies": {
         "node-fetch": "^3.2.10",
         "yargs": "^17.6.1"

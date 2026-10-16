@@ -24,10 +24,24 @@ import 'dotenv/config'
 const argv = yargs(hideBin(process.argv)).argv
 
 try {
+    const token = process.env.CONTENT_DB_X_TUMBLEWEED_TOKEN || process.env.CONTENT_DB_TOKEN || argv.token
+    if (!token) {
+        console.error('Error: Missing ContentDB token! Provide CONTENT_DB_X_TUMBLEWEED_TOKEN or pass --token=<token>.')
+        process.exit(1)
+    }
+
+    const title = argv.title ?? argv.tag
+    if (!title) {
+        console.error('Error: Missing release title/tag! Pass --title=<title>.')
+        process.exit(1)
+    }
+
+    const ref = argv.ref ?? title ?? 'main'
+
     const body = {
         method: 'git',
-        title: argv.title,
-        ref: 'master'
+        title: title,
+        ref: ref
     }
 
     const response = await fetch('https://content.luanti.org/api/packages/SaKeL/x_tumbleweed/releases/new/', {
@@ -35,7 +49,7 @@ try {
         body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.CONTENT_DB_X_TUMBLEWEED_TOKEN ?? argv.token}`
+            Authorization: `Bearer ${token}`
         }
     })
     const data = await response.json()

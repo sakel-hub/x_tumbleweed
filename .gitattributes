@@ -57,6 +57,7 @@ __pycache__ export-ignore
 /.luarc.json export-ignore
 /.cdb.json export-ignore
 /.github export-ignore
+/.github/** export-ignore
 /.agents export-ignore
 /.agents/** export-ignore
 /.gemini export-ignore
@@ -65,7 +66,6 @@ __pycache__ export-ignore
 /.cursor/** export-ignore
 /.claude export-ignore
 /.claude/** export-ignore
-/bitbucket-pipelines.yml export-ignore
 
 # Node.js, npm, and environment files
 /package.json export-ignore
