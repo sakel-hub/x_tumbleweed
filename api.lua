@@ -410,6 +410,19 @@ function XTumbleweed.register_entity(name, def)
     _def.can_flinch = false
     _def.die_in_water = true
     _def.death_duration = 0.5
+    _def.health_regen = false
+    _def.can_flee = false
+    _def.mob_type = "passive"
+    _def.aggro_radius = 0
+    _def.attack_range = 0
+    _def.damage = 0
+    _def.factions = {}
+
+    _def.damage_effect = {
+        type = "smoke",
+        color = "#D2B48C",
+        count = 10,
+    }
 
     _def.sounds = {
         distance = 16.0,
@@ -479,6 +492,13 @@ function XTumbleweed.register_entity(name, def)
         return false
     end
 
+    _def.on_hurt = function(self)
+        self.target = nil
+        if self.state ~= "walk" and self.state ~= "stand" and self.state ~= "dying" then
+            self.state = "walk"
+        end
+    end
+
     _def.on_death = function(self, killer)
         local pos = self.object:get_pos()
         if not pos then return end
@@ -542,6 +562,11 @@ function XTumbleweed.register_entity(name, def)
 
     _def.on_step = function(self, dtime, moveresult)
         if self.is_dead or self.state == "dying" then return end
+
+        self.target = nil
+        if self.state ~= "walk" and self.state ~= "stand" then
+            self.state = "walk"
+        end
 
         local pos = self.object:get_pos()
         if not pos then return end

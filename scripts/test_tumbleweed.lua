@@ -229,6 +229,10 @@ _G.x_mob_core = {
             or damage
             or 1
         self.hp = (self.hp or 10) - fleshy_dmg
+        self.target = puncher
+        if def and def.on_hurt then
+            def.on_hurt(self, puncher, fleshy_dmg)
+        end
         if self.hp <= 0 then
             self.is_dead = true
             self.state = "dying"
@@ -257,6 +261,14 @@ assert_eq("Health bar is disabled", mdef.health_bar, false)
 assert_eq("Die in water is enabled", mdef.die_in_water, true)
 assert_eq("Makes footstep sound is enabled", mdef.makes_footstep_sound, true)
 assert_eq("Knockback mult is 0 (custom punch impulse)", mdef.knockback_mult, 0)
+assert_eq("Health regen is disabled", mdef.health_regen, false)
+assert_eq("Can flee is disabled", mdef.can_flee, false)
+assert_eq("Mob type is passive", mdef.mob_type, "passive")
+assert_eq("Aggro radius is 0", mdef.aggro_radius, 0)
+assert_true("Damage effect is configured", mdef.damage_effect ~= nil)
+assert_eq("Damage effect type is smoke", mdef.damage_effect.type, "smoke")
+assert_eq("Damage effect color is sand dust", mdef.damage_effect.color, "#D2B48C")
+assert_eq("Damage effect count is 10", mdef.damage_effect.count, 10)
 assert_true("Sounds configuration exists", mdef.sounds ~= nil and mdef.sounds.hurt ~= nil)
 
 -- Test 2: Animation Frame Ranges
@@ -376,6 +388,15 @@ mdef.on_punch(mock_mob, mock_player, 1.0, { damage_groups = { fleshy = 3 } }, pu
 assert_eq("Mob takes fleshy damage via combat_handler (10 - 3 = 7)", mock_mob.hp, 7)
 assert_true("Mob launched horizontally in punch direction", mock_obj._vel.x > 0)
 assert_eq("Mob given vertical launch impulse 2.0", mock_obj._vel.y, 2.0)
+assert_eq("Mob target is cleared by on_hurt", mock_mob.target, nil)
+assert_eq("Mob state remains walk after punch", mock_mob.state, "walk")
+
+-- Test 12b: On-step target and state sanitization
+mock_mob.target = mock_player
+mock_mob.state = "fleeing"
+mdef.on_step(mock_mob, 0.05, { touching_ground = true })
+assert_eq("Mob target cleared on step", mock_mob.target, nil)
+assert_eq("Mob state reset to walk on step", mock_mob.state, "walk")
 
 -- Test 13: Lethal punch and Child Breakup
 spawned_entities = {}
