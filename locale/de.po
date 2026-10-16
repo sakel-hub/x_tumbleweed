@@ -1,0 +1,21 @@
+# German translations for x_tumbleweed.
+# Copyright (C) 2026 SaKeL
+# This file is distributed under the same license as the x_tumbleweed package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: x_tumbleweed\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-09 12:00+0000\n"
+"PO-Revision-Date: 2026-10-09 12:00+0000\n"
+"Last-Translator: SaKeL\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: api.lua
+msgid "Tumbleweed"
+msgstr "Steppenläufer"
