@@ -69,5 +69,5 @@ read_globals = {
 
     "default",
     "XTumbleweed",
-    "mobkit"
+    "x_mob_core"
 }

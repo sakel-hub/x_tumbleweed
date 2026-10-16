@@ -13,19 +13,14 @@
     Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to juraj.vajda@gmail.com
+    License along with this library; if not, see <https://www.gnu.org/licenses/>.
 --]]
 
-local path = core.get_modpath('x_tumbleweed')
+local modpath = core.get_modpath("x_tumbleweed")
 local mod_start_time = core.get_us_time()
 
-dofile(path .. '/api.lua')
-dofile(path .. '/entity.lua')
-
-core.register_globalstep(function(...)
-    XTumbleweed:globalstep(...)
-end)
+dofile(modpath .. "/api.lua")
+dofile(modpath .. "/entity.lua")
 
 local mod_end_time = (core.get_us_time() - mod_start_time) / 1000000
-
-print('[Mod] x_tumbleweed loaded.. [' .. mod_end_time .. 's]')
+core.log("action", string.format("[x_tumbleweed] loaded in %.4fs", mod_end_time))
