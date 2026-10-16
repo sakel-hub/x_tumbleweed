@@ -1,24 +1,24 @@
 {
     "name": "x_tumbleweed",
-    "version": "1.0.0",
-    "description": "Adds Enchanting Mechanics and API.",
+    "version": "2.0.0",
+    "description": "Lively desert tumbleweeds that roll and bounce across dunes in the wind, split into baby tumbleweeds, and drop native desert flora.",
     "main": "index.js",
     "type": "module",
     "directories": {
         "doc": "docs"
     },
     "engines": {
-        "node": ">=16.0.0",
-        "npm": ">=8.0.0"
+        "node": ">=22.0.0",
+        "npm": ">=10.0.0"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "lua scripts/test_tumbleweed.lua",
         "lint": "luacheck .",
         "push:ci": "node ./scripts/deploy.mjs"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://juraj_vajda@bitbucket.org/minetest_gamers/x_tumbleweed.git"
+        "url": "git+https://bitbucket.org/minetest_gamers/x_tumbleweed.git"
     },
     "author": "SaKeL",
     "license": "LGPL-2.1-or-later",

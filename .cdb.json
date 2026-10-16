@@ -1,9 +1,10 @@
 {
+    "$schema": "https://content.luanti.org/api/cdb_schema/",
     "type": "MOD",
     "title": "X Tumbleweed",
     "name": "x_tumbleweed",
-    "short_description": "Adds Tumbleweed.",
-    "dev_state": "MAINTENANCE_ONLY",
+    "short_description": "Lively desert tumbleweeds that roll and bounce across dunes in the wind, split into baby tumbleweeds, and drop native desert flora.",
+    "dev_state": "ACTIVELY_DEVELOPED",
     "tags": [
         "survival",
         "mobs",
