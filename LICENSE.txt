@@ -1,7 +1,7 @@
                   GNU LESSER GENERAL PUBLIC LICENSE
                        Version 2.1, February 1999
 
- Copyright (C) 2023 SaKeL <juraj.vajda@gmail.com>
+ Copyright (C) 2023-2026 SaKeL
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
@@ -454,28 +454,28 @@ FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGES.
 
-### Textures
+### Textures & Visual Assets
 
-**CC-BY-SA-4.0, Pixel Perfection by XSSheep**, https://minecraft.curseforge.com/projects/pixel-perfection-freshly-updated
-
-- x_tumbleweed_death_particle_animated.png
-
-**CC-BY-SA-4.0, by SaKeL**
-
-- x_tumbleweed_tumbleweed_1.png
-- x_tumbleweed_tumbleweed_2.png
-- x_tumbleweed_tumbleweed_3.png
-
-### Models
+**CC-BY-SA-4.0, Pixel Perfection by XSSheep**
+- `textures/x_tumbleweed_death_particle_animated.png` (16x128 animated particle sheet, 8 frames of 16x16)
 
 **CC-BY-SA-4.0, by SaKeL**
+- `textures/x_tumbleweed_tumbleweed_1.png` (16x16 texture)
+- `textures/x_tumbleweed_tumbleweed_2.png` (16x16 texture)
+- `textures/x_tumbleweed_tumbleweed_3.png` (16x16 texture)
+- `textures/x_tumbleweed_tumbleweed_mask_1.png` (16x16 mask texture)
+- `textures/x_tumbleweed_tumbleweed_mask_2.png` (16x16 mask texture)
+- `textures/x_tumbleweed_tumbleweed_mask_3.png` (16x16 mask texture)
 
-- x_tumbleweed_tumbleweed.b3d
+### 3D Models & Source Assets
 
-### Sounds
+**CC-BY-SA-4.0, by SaKeL**
+- `models/x_tumbleweed_tumbleweed.b3d` (Exported animated Blitz3D model, rolling walk cycle frames 1-30)
+- `assets/tumbleweed.blend` (Blender 3D source model and rig)
+
+### Audio & Sound Effects
 
 **CC-BY-4.0, by duckduckpony**, https://freesound.org
-
-- x_tumbleweed_tumbleweed.1.ogg
-- x_tumbleweed_tumbleweed.2.ogg
-- x_tumbleweed_tumbleweed.3.ogg
+- `sounds/x_tumbleweed_tumbleweed.1.ogg` (Rolling tumbleweed rustle audio sample)
+- `sounds/x_tumbleweed_tumbleweed.2.ogg` (Rolling tumbleweed rustle audio sample)
+- `sounds/x_tumbleweed_tumbleweed.3.ogg` (Rolling tumbleweed rustle audio sample)
