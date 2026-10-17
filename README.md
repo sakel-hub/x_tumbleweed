@@ -70,6 +70,10 @@ end
 
 ---
 
+## Human Authorship Certification (Zero AI)
+
+This project is entirely handcrafted. Every line of code, commit, configuration, documentation, and creative asset was designed, authored, and verified solely by human maintainers. No generative AI or automated generation tools were used at any stage of development.
+
 ## Credits & License
 
 ### Code
